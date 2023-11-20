@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.victor.domain.User;
+import br.com.victor.dto.UserDTO;
 import br.com.victor.services.UserService;
 
 @RestController
@@ -19,9 +20,11 @@ public class UserResource {
     private UserService userService;
     
     @GetMapping()
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         List<User> users = userService.findAll();
 
-        return ResponseEntity.ok().body(users);
+        List<UserDTO> usersDTO = users.stream().map(u -> new UserDTO(u)).toList();
+
+        return ResponseEntity.ok().body(usersDTO);
     }
 }
