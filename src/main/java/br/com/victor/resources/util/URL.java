@@ -2,7 +2,6 @@ package br.com.victor.resources.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +20,7 @@ public class URL {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
-            return LocalDate.parse(textDate);
+            return LocalDate.parse(textDate, fmt);
         }
         catch (Exception e) {
             return defaultValue;
